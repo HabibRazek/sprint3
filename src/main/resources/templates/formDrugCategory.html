@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Drug Category</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header" th:if="${mode=='new'}"> Add Drug Category </div>
+            <div class="card-header" th:if="${mode=='edit'}">Update Drug Category
+            </div>
+            <div class="card-body">
+                <form th:action="@{SaveDrugCategory}" method="post">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="control-label" hidden>ID :</label>
+                            <input type="hidden" name="idDrugCat" class="form-control"
+                                   th:value="${drugCategory.idDrugCat}" />
+                            <span th:errors= ${drugCategory.idDrugCat} class="text-danger"> </span>
+                        </div>
+
+                        <label class="control-label">Name :</label>
+                        <input type="text" name="name" class="form-control"
+                               th:value="${drugCategory.name}" />
+                        <span th:errors= ${drugCategory.name} class="text-danger"> </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Description :</label>
+                        <input type="text" name="description" class="form-control"
+                               th:value="${drugCategory.description}" />
+                        <span th:errors= ${drugCategory.description} class="text-danger"> </span>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                </form>
+            </div>
+            <br/>
+            <br/>
+            <a href="ListeDrugCategories">List Of Drug Category</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

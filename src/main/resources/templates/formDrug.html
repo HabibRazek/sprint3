@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Drug</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card-header" th:if="${mode=='new'}"> Add Drugs </div>
+        <div class="card-header" th:if="${mode=='edit'}">Update Drugs</div>
+        <div class="card-body">
+
+            <form th:action="@{saveDrug}" method="post">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="control-label" hidden>ID Drug </label>
+                        <input type="hidden" name="idDrug" class="form-control"
+                               th:value="${drug.idDrug}" />
+                    </div>
+                <div class="form-group">
+                    <label class="control-label">Name :</label>
+                    <input type="text" name="name" class="form-control" th:value="${drug.name}"/>
+                    <span th:errors= ${drug.name} class="text-danger"> </span>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Dosage :</label>
+                    <input type="text" name="dosage" class="form-control" th:value="${drug.dosage}"/>
+                    <span th:errors= ${drug.dosage} class="text-danger"> </span>
+
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label">date creation :</label>
+                    <input type="date" name="date" class="form-control" th:value="${drug.dateCreation}" />
+                    <span th:errors= ${drug.dateCreation} class="text-danger"> </span>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="categorie">Drug Category</label>
+                    <select class="form-control form-control-lg" id="categorie" name="categorie.idDrugCat">
+                        <option value="">Select Drug Category</option>
+                        <option th:each="drugCategorie : ${drugCategories}"
+                                th:value="${drugCategorie.idDrugCat}"
+                                th:text="${drugCategorie.name}"
+                                th:selected="${selectedDrugcat != null and drugCategorie.idDrugCat == selectedDrugcat.idDrugCat}">
+                        </option>
+                    </select>
+                </div>
+
+
+
+                <div>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+        <br/>
+        <br/>
+        <a href="ListeDrugs">List of drugs</a>
+    </div>
+</div>
+</body>
+</html>

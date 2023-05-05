@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+      href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<c:url value="/css/main.css" var="jstlCss" />
+<link href="${jstlCss}" rel="stylesheet" />
+<script type="text/javascript"
+        src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
+    <title>Update Drug</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card-body">
+            <form action="updateDrug" method="post">
+                <div class="form-group">
+                    <label class="control-label" th:for="idDrug">ID Drug :</label>
+                    <input type="text" name="idDrug" th:value="${drug.idDrug}"
+                           readonly class="form-control" id="idDrug"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" th:for="name">Name :</label>
+                    <input type="text" name="name" th:value="${drug.name}"
+                           class="form-control" id="name"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" th:for="dosage">Dosage :</label>
+                    <input type="text" name="dosage" th:value="${drug.dosage}"
+                           class="form-control" id="dosage"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" th:for="date">Date of creation :</label>
+                    <input type="date" name="date" th:value="${#dates.format(drug.dateCreation, 'yyyy-MM-dd')}"
+                           class="form-control" id="date"/>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">update</button>
+                </div>
+            </form>
+        </div>
+        <br/>
+        <br/>
+        <a href="ListeDrugs">List Drugs</a>
+    </div>
+</div>
+</body>
+</html>

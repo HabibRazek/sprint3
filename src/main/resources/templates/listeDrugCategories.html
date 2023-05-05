@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+    <meta charset="utf-8">
+    <title>List Drugs Category</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                List Drugs Category
+            </div>
+            <div class="card-body">
+
+                <table class="table table-striped">
+
+                    <tr>
+                        <th>ID</th><th>Name</th><th>Description</th>
+
+                    </tr>
+                    <tr th:each="d:${drugCategories.content}">
+                        <td th:text="${d.idDrugCat}"></td>
+                        <td th:text="${d.name}"></td>
+                        <td th:text="${d.description}"></td>
+
+                        <td><a class="btn btn-primary" th:href="@{modifierDrugCategory(id=${d.idDrugCat})}">Edit</a></td>
+
+
+                    </tr>
+                </table>
+                <ul class="nav nav-pills">
+                    <li th:each="page,status:${pages}">
+                        <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+                           th:href="@{ ListeDrugCategories(page=${status.index}, size=${size} ) }"
+                           th:text="${status.index }"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
